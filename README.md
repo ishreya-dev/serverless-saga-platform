@@ -5,12 +5,14 @@
 > Flash Sale Saga is a serverless, event-driven system that simulates high-concurrency ticket purchasing while guaranteeing **exactly-once payment processing**, **idempotent request handling**, **automatic compensation**, and **inventory consistency** without using distributed transactions or two-phase commit.
 
 <p align="center">
-
+    
+![CI](https://github.com/ishreya-dev/serverless-saga-platform/actions/workflows/ci.yml/badge.svg)
 ![Python](https://img.shields.io/badge/Python-3.11+-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=for-the-badge&logo=fastapi&logoColor=white)
 ![AWS](https://img.shields.io/badge/AWS_Serverless-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white)
 ![Terraform](https://img.shields.io/badge/Terraform-623CE4?style=for-the-badge&logo=terraform&logoColor=white)
 ![Next.js](https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white)
+![License](https://img.shields.io/badge/License-MIT-yellow.svg)
 
 </p>
 
