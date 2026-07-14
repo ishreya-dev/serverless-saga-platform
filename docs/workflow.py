@@ -1,14 +1,12 @@
-"""
-workflow.py -> workflow.png
-
-The business story: what happens, in order, when a saga succeeds, and
-what happens when one step fails. Dashed arrows are used exclusively
-for the rollback/failure path so the two outcomes stay visually distinct.
-"""
-
 from diagram_lib import (
-    new_canvas, draw_title, draw_card, draw_arrow, draw_dashed_arrow,
-    draw_legend, draw_section, save, GRID,
+    draw_arrow,
+    draw_card,
+    draw_dashed_arrow,
+    draw_legend,
+    draw_section,
+    draw_title,
+    new_canvas,
+    save,
 )
 
 WIDTH, HEIGHT = 11.5, 6.6
@@ -33,7 +31,9 @@ ROLLBACK_PATH = [
 def main():
     fig, ax = new_canvas(WIDTH, HEIGHT)
     draw_title(
-        ax, 0.4, HEIGHT - 0.35,
+        ax,
+        0.4,
+        HEIGHT - 0.35,
         "Flash Sale Saga -- Choreography",
         "Every service reacts to the previous event; there is no central orchestrator.",
     )
@@ -63,25 +63,35 @@ def main():
 
     # dashed arrow from the fork point across to the failure branch
     draw_dashed_arrow(
-        ax, happy_anchors[branch_index]["right"], rollback_anchors[0]["left"],
+        ax,
+        happy_anchors[branch_index]["right"],
+        rollback_anchors[0]["left"],
         label="on reservation failure",
     )
     for i in range(len(rollback_anchors) - 1):
         draw_dashed_arrow(ax, rollback_anchors[i]["bottom"], rollback_anchors[i + 1]["top"])
 
     draw_section(
-        ax, left_x - 0.25, happy_anchors[-1]["bottom"][1] - 0.35,
-        CARD_W + 0.5, top_y + CARD_H - (happy_anchors[-1]["bottom"][1] - 0.35) + 0.15,
+        ax,
+        left_x - 0.25,
+        happy_anchors[-1]["bottom"][1] - 0.35,
+        CARD_W + 0.5,
+        top_y + CARD_H - (happy_anchors[-1]["bottom"][1] - 0.35) + 0.15,
         "success path",
     )
     draw_section(
-        ax, right_x - 0.25, rollback_anchors[-1]["bottom"][1] - 0.35,
-        CARD_W + 0.5, branch_y + CARD_H - (rollback_anchors[-1]["bottom"][1] - 0.35) + 0.15,
+        ax,
+        right_x - 0.25,
+        rollback_anchors[-1]["bottom"][1] - 0.35,
+        CARD_W + 0.5,
+        branch_y + CARD_H - (rollback_anchors[-1]["bottom"][1] - 0.35) + 0.15,
         "compensation path",
     )
 
     draw_legend(
-        ax, 0.7, 0.35,
+        ax,
+        0.7,
+        0.35,
         [("solid", "event -> next service"), ("dashed", "compensating action")],
     )
 

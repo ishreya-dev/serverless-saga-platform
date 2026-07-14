@@ -1,17 +1,18 @@
 from diagram_lib import (
-    new_canvas,
-    draw_title,
+    COLOR_TEXT_MUTED,
+    draw_arrow,
     draw_card,
     draw_database,
     draw_queue,
-    draw_arrow,
     draw_section,
+    draw_title,
+    new_canvas,
     save,
-    COLOR_TEXT_MUTED,
 )
 
 WIDTH = 11.5
 HEIGHT = 7.4
+
 
 def main():
     fig, ax = new_canvas(WIDTH, HEIGHT)
@@ -28,35 +29,47 @@ def main():
     # Compute Layer
     # ============================================================
 
-    COMPUTE_Y = 5.35
-    
-    gw = draw_card(
-        ax, 0.6, COMPUTE_Y, 1.8, 0.75,
-        "API Gateway", "HTTP API"
-    )
+    compute_y = 5.35
+
+    gw = draw_card(ax, 0.6, compute_y, 1.8, 0.75, "API Gateway", "HTTP API")
 
     payment = draw_card(
-        ax, 3.0, COMPUTE_Y, 1.8, 0.75,
-        "Payment Service", "AWS Lambda",
+        ax,
+        3.0,
+        compute_y,
+        1.8,
+        0.75,
+        "Payment Service",
+        "AWS Lambda",
         accent=True,
     )
 
     inventory = draw_card(
-        ax, 5.2, COMPUTE_Y, 1.8, 0.75,
-        "Inventory Service", "AWS Lambda",
+        ax,
+        5.2,
+        compute_y,
+        1.8,
+        0.75,
+        "Inventory Service",
+        "AWS Lambda",
         accent=True,
     )
 
     rollback = draw_card(
-        ax, 7.4, COMPUTE_Y, 1.8, 0.75,
-        "Rollback Service", "AWS Lambda",
+        ax,
+        7.4,
+        compute_y,
+        1.8,
+        0.75,
+        "Rollback Service",
+        "AWS Lambda",
         accent=True,
     )
 
     draw_section(
         ax,
         2.8,
-        COMPUTE_Y - 0.20,
+        compute_y - 0.20,
         6.8,
         1.15,
         "Compute",
@@ -70,17 +83,11 @@ def main():
     # Messaging
     # ============================================================
 
-    payment_q = draw_queue(ax, 3.0, 3.9, 1.8, 0.75,
-                           "SQS FIFO",
-                           "payment-events.fifo")
+    payment_q = draw_queue(ax, 3.0, 3.9, 1.8, 0.75, "SQS FIFO", "payment-events.fifo")
 
-    inventory_q = draw_queue(ax, 5.2, 3.9, 1.8, 0.75,
-                             "SQS FIFO",
-                             "inventory-events.fifo")
+    inventory_q = draw_queue(ax, 5.2, 3.9, 1.8, 0.75, "SQS FIFO", "inventory-events.fifo")
 
-    rollback_q = draw_queue(ax, 7.4, 3.9, 1.8, 0.75,
-                            "SQS FIFO",
-                            "rollback-events.fifo")
+    rollback_q = draw_queue(ax, 7.4, 3.9, 1.8, 0.75, "SQS FIFO", "rollback-events.fifo")
 
     draw_section(ax, 2.8, 3.65, 6.8, 1.15, "Messaging")
 
@@ -92,17 +99,11 @@ def main():
     # Dead Letter Queues
     # ============================================================
 
-    payment_dlq = draw_queue(ax, 3.0, 2.2, 1.8, 0.65,
-                             "Payment DLQ",
-                             "")
+    payment_dlq = draw_queue(ax, 3.0, 2.2, 1.8, 0.65, "Payment DLQ", "")
 
-    inventory_dlq = draw_queue(ax, 5.2, 2.2, 1.8, 0.65,
-                               "Inventory DLQ",
-                               "")
+    inventory_dlq = draw_queue(ax, 5.2, 2.2, 1.8, 0.65, "Inventory DLQ", "")
 
-    rollback_dlq = draw_queue(ax, 7.4, 2.2, 1.8, 0.65,
-                              "Rollback DLQ",
-                              "")
+    rollback_dlq = draw_queue(ax, 7.4, 2.2, 1.8, 0.65, "Rollback DLQ", "")
 
     draw_arrow(ax, payment_q["bottom"], payment_dlq["top"])
     draw_arrow(ax, inventory_q["bottom"], inventory_dlq["top"])
@@ -155,5 +156,6 @@ def main():
 
     save(fig, "deployment.png")
 
+
 if __name__ == "__main__":
-        main()
+    main()
